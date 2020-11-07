@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>ABOUT PAGE</h1>
+        PAGE NOT FOUND 404.
     </div>
 </template>

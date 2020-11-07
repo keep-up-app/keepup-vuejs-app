@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>ABOUT PAGE</h1>
+        <h1>GAME PAGE</h1>
     </div>
 </template>
