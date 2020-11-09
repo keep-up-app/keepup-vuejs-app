@@ -1,9 +1,9 @@
 <template>
     <div class="noselect">
         <div id="title-container">
-            <div class="center-h">
+            <div class="content">
                 <h1>{{ title }}</h1>
-                <p><router-link id="login-link" to="/login">Login</router-link>{{ message }}</p>
+                <router-link id="login-link" to="auth/login">Login</router-link><p>{{ message }}</p>
             </div>
         </div>
     </div>
@@ -26,21 +26,18 @@ export default {
         background: linear-gradient(#3c8030, #489c39);
     }
 
-    #title-container div {
-        width: 1000px;
-    }
-
     h1 {
-        margin-top: 25px;
+        margin-top: 30px;
         margin-bottom: 0;
     }
 
     p {
-        opacity: 0.85;
+        opacity: 0.75;
+        display: inline;
     }
     
     #login-link {
-        opacity: 1 !important;
+        text-decoration: underline;
     }
 
 </style>

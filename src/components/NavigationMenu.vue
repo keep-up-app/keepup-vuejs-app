@@ -12,7 +12,7 @@
                 </div>
                 <div class="center-v right" id="auth">
                     <ul>
-                        <li><router-link class="btn" to="/auth/login">Login</router-link></li>
+                        <li><router-link class="btn" to="/auth/login">Sign In</router-link></li>
                         <li><router-link class="btn-inverted" to="/auth/register">Register</router-link></li>
                     </ul>
                 </div>
@@ -62,7 +62,7 @@ export default {
 
     li {
         display: inline;
-        margin: 0 10px;
+        margin: 0 5px;
     }
 
     #logo {
