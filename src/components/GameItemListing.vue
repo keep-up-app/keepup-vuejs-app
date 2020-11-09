@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <p>{{ game.name }}</p>
+        <p>{{ game }}</p>
     </div>
 </template>
 
@@ -13,9 +13,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-    p {
-        display: inline;
-    }
     
 </style>

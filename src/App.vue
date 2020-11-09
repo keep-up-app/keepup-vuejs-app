@@ -4,16 +4,19 @@
         <main>
             <router-view/>
         </main>
+        <Footer/>
     </div>
 </template>
 
 <script>
 
 import NavigationMenu from '@/components/NavigationMenu.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
     components: {
-        NavigationMenu
+        NavigationMenu,
+        Footer
     }
 }
 

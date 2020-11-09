@@ -1,10 +1,8 @@
 <template>
-    <div class="noselect">
-        <div id="title-container">
-            <div class="content">
-                <h1>{{ title }}</h1>
-                <router-link id="login-link" to="auth/login">Login</router-link><p>{{ message }}</p>
-            </div>
+    <div id="title-container">
+        <div class="content">
+            <h1>{{ title }}</h1>
+            <router-link id="login-link" to="auth/login">Login</router-link><p>{{ message }}</p>
         </div>
     </div>
 </template>
