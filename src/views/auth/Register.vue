@@ -37,7 +37,7 @@ export default {
     methods: {
         register: async function() {
             this.submitted = true;
-            console.log(this.submitted);
+            this.error = null;
 
             const proxyurl = 'https://cors-anywhere.herokuapp.com/';
             Axios.post(proxyurl + 'https://user-api-endpoint.herokuapp.com/user/create', {
