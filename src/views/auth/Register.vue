@@ -40,7 +40,7 @@ export default {
             this.error = null;
 
             const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-            Axios.post(proxyurl + 'https://user-api-endpoint.herokuapp.com/user/create', {
+            Axios.post(proxyurl + 'https://register-api-endpoint.herokuapp.com', {
                 email: this.form.email,
                 password: {
                     first: this.form.choosePassword,

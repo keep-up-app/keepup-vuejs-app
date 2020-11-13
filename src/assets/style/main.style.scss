@@ -33,6 +33,7 @@
 
 .btn-inverted,
 .btn {
+    user-select: none;
     width: auto;
     height: 33px;
     padding: 5px 20px;
@@ -100,11 +101,13 @@
 .error {
     color: $red;
     font-weight: bolder;
+    user-select: none;
 }
 
 .success {
     color: $green;
     font-weight: bolder;
+    user-select: none;
 }
 
 .simple-link {
