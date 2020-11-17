@@ -50,7 +50,7 @@ export default {
                     'second': this.form.repeatPassword
                 }
             })
-            .then(success => { this.$router.push('/'); console.log(success) })
+            .then(success => { this.$router.push('/auth/steam'); console.log('redirecting to steam auth' + success) })
             .catch(err => { this.error = err.response ? err.response.data.error : "An error occured."; })
             .finally(this.submitted = false);
         },
