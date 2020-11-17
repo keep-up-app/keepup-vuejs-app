@@ -2,10 +2,10 @@
     <div class="content">
         <div id="auth">
             <h1>REGISTER</h1>
-            <p class="space">Sign up at KeepUp to see your Steam inventory's true value.</p>
+            <p class="space">Sign up at <strong>KeepUp</strong> to see your Steam inventory's true value.</p>
             <div class="message-box"><p :class="{ 'error' : error }">{{ error }}</p></div>
             <div id="auth-form" :class="{ 'disabled' : submitted }">
-                <form @submit.prevent="register">
+                <form @submit.prevent="submit">
                     <input placeholder="Email" type="text" v-model="form.email">
                     <input placeholder="Choose Password" type="password" v-model="form.choosePassword">
                     <input class="space" placeholder="Repeat Password" type="password" v-model="form.repeatPassword">
@@ -19,9 +19,11 @@
 
 <script>
 
-import Axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
+    name: 'Register',
+
     data() {
         return {
             submitted: false,
@@ -35,25 +37,26 @@ export default {
     },
 
     methods: {
-        register: async function() {
+        ...mapActions(['REGISTER']),
+
+        submit: function() {
             this.submitted = true;
             this.error = null;
 
-            const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-            Axios.post(proxyurl + 'https://register-api-endpoint.herokuapp.com', {
-                email: this.form.email,
-                password: {
-                    first: this.form.choosePassword,
-                    second: this.form.repeatPassword
-                }})
-            .catch(err => {
-                this.error = err.response.data.error
-                    ? err.response.data.error
-                    : "Server Error 500..."
-            }).finally(() => this.submitted = false);
-        }
+            this.REGISTER({
+                'email': this.form.email,
+                'password': {
+                    'first': this.form.choosePassword,
+                    'second': this.form.repeatPassword
+                }
+            })
+            .then(success => { this.$router.push('/'); console.log(success) })
+            .catch(err => { this.error = err.response ? err.response.data.error : "An error occured."; })
+            .finally(this.submitted = false);
+        },
     },
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -67,6 +70,7 @@ export default {
 
     #auth-form {
         position: absolute;
+        width: 100%;
         bottom: 0;
     }
 

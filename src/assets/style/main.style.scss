@@ -32,6 +32,7 @@
 }
 
 .btn-inverted,
+.btn-special,
 .btn {
     user-select: none;
     width: auto;
@@ -58,7 +59,13 @@
     background: $theme;
 }
 
+.btn-special {
+    border: $green 2px solid;
+    background: $green;
+}
+
 .btn:hover,
+.btn-special:hover,
 .btn-inverted:hover,
 .simple-link:hover {
     transition: ease-in 150ms;

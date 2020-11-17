@@ -11,9 +11,13 @@
                     </ul>
                 </div>
                 <div class="center-v right" id="auth">
-                    <ul>
+                    <ul v-if="!isAuthed">
                         <li><router-link class="btn" to="/auth/login">Sign In</router-link></li>
                         <li><router-link class="btn-inverted" to="/auth/register">Register</router-link></li>
+                    </ul>
+                    <ul v-else>
+                        <li><router-link class="btn" to="/account">{{ Username }}</router-link></li>
+                        <li><a @click="logout" class="btn-inverted">Logout</a></li>
                     </ul>
                 </div>
             </nav>
@@ -23,20 +27,21 @@
 
 <script>
 
+import { mapActions } from 'vuex';
+
 export default {
-    
-    created () {
-        window.addEventListener('scroll', this.scrollChange);
-    },
-    
-    destroyed () {
-        window.removeEventListener('scroll', this.scrollChange);
+
+    computed: {
+        isAuthed: function(){ return this.$store.getters.isAuthenticated },
+        Username: function(){ return this.$store.getters.User['username'] }
     },
     
     methods: {
-        scrollChange () {
-            //var navMenu = document.getElementById('nav-container');
-        }
+        ...mapActions(['LOGOUT']),
+
+        logout: function() {
+            this.LOGOUT().then(success => { this.$router.push('/auth/login'); console.log(success) });
+        },
     }
 }
 

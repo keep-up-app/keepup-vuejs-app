@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from "../store";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
 
@@ -10,27 +11,32 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: () => import('../views/Market.vue')
+        component: () => import('../views/Market.vue'),
+        meta: { guest: true }
     },
     {
         path: '/about',
         name: 'About',
-        component: () => import('../views/About.vue')
+        component: () => import('../views/About.vue'),
+        meta: { guest: true }
     },
     {
         path: '/account',
         name: 'Account',
-        component: () => import('../views/Account.vue')
+        component: () => import('../views/Account.vue'),
+        meta: { requiresAuth: true }
     },
     {
         path: '/games',
         name: 'Games',
-        component: () => import('../views/Games.vue')
+        component: () => import('../views/Games.vue'),
+        meta: { guest: true }
     },
     {
         path: '/market',
         name: 'Maket',
-        component: () => import('../views/Market.vue')
+        component: () => import('../views/Market.vue'),
+        meta: { guest: true }
     },
 
     // authentication 
@@ -38,17 +44,20 @@ const routes = [
     {
         path: '/auth/login',
         name: 'Login',
-        component: () => import('../views/auth/Login.vue')
+        component: () => import('../views/auth/Login.vue'),
+        meta: { guest: true }
     },
     {
         path: '/auth/register',
         name: 'Register',
-        component: () => import('../views/auth/Register.vue')
+        component: () => import('../views/auth/Register.vue'),
+        meta: { guest: true }
     },
     {
         path: '/auth/steam',
         name: 'Steam Auth',
-        component: () => import('../views/auth/Steam.vue')
+        component: () => import('../views/auth/Steam.vue'),
+        meta: { guest: true }
     },
 
     // error
@@ -58,8 +67,23 @@ const routes = [
         name: '404 - Page Not Found.',
         component: () => import('../views/error/404.vue')
     }
-]
+];
 
-const router = new VueRouter({ routes })
+const router = new VueRouter({
+    mode: 'history',
+    routes,
+});
   
-export default router
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (store.getters.isAuthenticated) {
+            next();
+            return;
+        }
+        next('auth/login');
+    } else {
+        next();
+    }
+});
+  
+export default router;

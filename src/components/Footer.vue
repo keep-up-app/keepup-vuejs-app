@@ -1,17 +1,18 @@
 <template>
     <footer>
         <section id="footer-container" class="content">
-            <p class="center-h">
-                <router-link to="/market">Market</router-link> |
-                <router-link to="/games">Games</router-link> |
+            <div class="center-h" id="site-links">
+                <router-link to="/market">Market</router-link> |  
+                <router-link to="/games">Games</router-link> | 
                 <router-link to="/about">About</router-link>
-            </p>
+            </div>
         </section>
     </footer>
 </template>
 
 <style lang="scss" scoped>
-    p {
-        opacity: 0.5;
+    #site-links {
+        font-size: 8px;
+        opacity: 0.75;
     }
 </style>
