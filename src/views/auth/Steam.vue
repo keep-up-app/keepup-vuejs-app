@@ -10,8 +10,8 @@
                     <input type="hidden" name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" />
                     <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
                     <input type="hidden" name="openid.mode" value="checkid_setup" />
-                    <input type="hidden" name="openid.realm" :value="getRealmUrl()"/>
-                    <input type="hidden" name="openid.return_to" :value="getRealmUrl()" />
+                    <input type="hidden" name="openid.realm" value="https://keepup-vuejs-app.herokuapp.com/auth/steam"/>
+                    <input type="hidden" name="openid.return_to" value="https://keepup-vuejs-app.herokuapp.com/auth/steam" />
                     <button class="btn-special large" type="submit">Link Steam</button>
                 </form>
                 <router-link class="btn-inverted large" to="/games">Skip</router-link>
@@ -31,10 +31,6 @@ export default {
             let steamid = dataUrl.substring(dataUrl.lastIndexOf('/') + 1);
             if (steamid) this.$store.dispatch('LINK_STEAM', steamid).then(success => { this.$router.push('/account'); console.log(success) });
         }
-    },
-
-    methods: {
-        getRealmUrl: function() { return window.location.origin + this.$route.fullPath; }
     },
 }
 
