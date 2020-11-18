@@ -11,7 +11,7 @@
                     <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
                     <input type="hidden" name="openid.mode" value="checkid_setup" />
                     <input type="hidden" name="openid.realm" value="https://keepup-vuejs-app.herokuapp.com/auth/steam"/>
-                    <input type="hidden" name="openid.return_to" value="https://keepup-vuejs-app.herokuapp.com/auth/steam" />
+                    <input type="hidden" name="openid.return_to" value="https://keepup-vuejs-app.herokuapp.com/account" />
                     <button class="btn-special large" type="submit">Link Steam</button>
                 </form>
                 <router-link class="btn-inverted large" to="/games">Skip</router-link>
