@@ -5,7 +5,15 @@
             <p class="space">Link your <strong>Steam</strong> to view your game stats, invenetory and more.</p>
             <p class="space">This is optional. You may proceed within linking your account by pressing the <strong>SKIP</strong> button</p>
             <div id="auth-form">
-                <button class="btn-special large" @click="submit">Link Steam</button>
+                <form action="https://steamcommunity.com/openid/login" method="POST">
+                    <input type="hidden" name="openid.identity" value="http://specs.openid.net/auth/2.0/identifier_select" />
+                    <input type="hidden" name="openid.claimed_id" value="http://specs.openid.net/auth/2.0/identifier_select" />
+                    <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
+                    <input type="hidden" name="openid.mode" value="checkid_setup" />
+                    <input type="hidden" name="openid.realm" :value="getRealmUrl()"/>
+                    <input type="hidden" name="openid.return_to" :value="getRealmUrl()" />
+                    <button class="btn-special large" type="submit">Link Steam</button>
+                </form>
                 <router-link class="btn-inverted large" to="/games">Skip</router-link>
             </div>
         </div>
@@ -14,23 +22,19 @@
 
 <script>
 
-import { mapActions } from "vuex";
-
 export default {
     name: 'Steam',
 
-    methods: {
-        ...mapActions(['linkSteam']),
-
-        submit: async function() {
-
-            await this.login({
-                'email': this.form.email,
-                'password': this.form.password
-            }).catch(err => {
-                this.error = err.response.data.error || "An error occured.";
-            }).finally(this.submitted = false);
+    mounted() {
+        let dataUrl = this.$route.query['openid.claimed_id'];
+        if (dataUrl) {
+            let steamid = dataUrl.substring(dataUrl.lastIndexOf('/') + 1);
+            if (steamid) this.$store.dispatch('LINK_STEAM', steamid).then(success => { this.$router.push('/account'); console.log(success) });
         }
+    },
+
+    methods: {
+        getRealmUrl: function() { return window.location.origin + this.$route.fullPath; }
     },
 }
 

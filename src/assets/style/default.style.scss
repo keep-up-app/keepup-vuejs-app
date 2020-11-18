@@ -47,6 +47,7 @@ a, button {
 
 p {
     line-height: 25px;
+    display:inline-block;
 }
 
 h1 {
@@ -94,7 +95,7 @@ footer {
     bottom: 0;
     z-index: -10000;
     width: 100%;
-    height: 100px;
+    height: 60px;
     background: $darker;
     overflow: hidden;
 }

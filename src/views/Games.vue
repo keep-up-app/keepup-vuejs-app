@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageTitle title='Steam Game' message=' to see your games and game stats.'/>
+        <PageTitle title='Steam Games' message='see your games and game stats.'/>
         <LoadingAnimation v-if="loading" />
         <div v-bind:key="game.appid" v-for="game in games">
             <GameItemListing v-bind:game="game" />
@@ -31,16 +31,14 @@ export default {
     },
 
     mounted() {
-        setTimeout(() => {
-            var steamid = '76561198272843849';
-            const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var steamid = '76561198272843849';
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
-            Axios.get(proxyurl + `https://game-api-endpoint.herokuapp.com/game/owned/${steamid}`)
-                .then(res => {
-                    this.games = res.data.games
-                    this.loading = false;
-                }).catch(err => console.error(err));    
-        }, 3000);
+        Axios.get(proxyurl + `https://game-api-endpoint.herokuapp.com/game/owned/${steamid}`)
+            .then(res => {
+                this.games = res.data.games
+                this.loading = false;
+            }).catch(err => console.error(err));    
     },
 }
 

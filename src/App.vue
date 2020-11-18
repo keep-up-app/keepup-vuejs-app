@@ -1,23 +1,31 @@
 <template>
     <div id="app">
         <NavigationMenu/>
+        <SteamNotLinkedBanner v-if="withoutSteam"/>
         <main>
             <router-view/>
         </main>
-        <Footer/>
     </div>
 </template>
 
 <script>
 
-import NavigationMenu from '@/components/NavigationMenu.vue'
-import Footer from '@/components/Footer.vue'
+import SteamNotLinkedBanner from '@/components/SteamNotLinkedBanner.vue';
+import NavigationMenu from '@/components/NavigationMenu.vue';
 
 export default {
     components: {
+        SteamNotLinkedBanner,
         NavigationMenu,
-        Footer
-    }
+    },
+    
+    computed: {
+        withoutSteam: function() {
+            if (this.$store.getters.isAuthenticated)
+                return !this.$store.getters.isSteamAuthenticated;
+            return false;
+        },
+    },
 }
 
 </script>

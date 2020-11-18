@@ -12,31 +12,27 @@ const routes = [
         path: '/',
         name: 'Home',
         component: () => import('../views/Market.vue'),
-        meta: { guest: true }
     },
     {
         path: '/about',
         name: 'About',
         component: () => import('../views/About.vue'),
-        meta: { guest: true }
+    },
+    {
+        path: '/games',
+        name: 'Games',
+        component: () => import('../views/Games.vue'),
+    },
+    {
+        path: '/market',
+        name: 'Maket',
+        component: () => import('../views/Market.vue'),
     },
     {
         path: '/account',
         name: 'Account',
         component: () => import('../views/Account.vue'),
         meta: { requiresAuth: true }
-    },
-    {
-        path: '/games',
-        name: 'Games',
-        component: () => import('../views/Games.vue'),
-        meta: { guest: true }
-    },
-    {
-        path: '/market',
-        name: 'Maket',
-        component: () => import('../views/Market.vue'),
-        meta: { guest: true }
     },
 
     // authentication 
@@ -57,7 +53,7 @@ const routes = [
         path: '/auth/steam',
         name: 'Steam Auth',
         component: () => import('../views/auth/Steam.vue'),
-        meta: { guest: true }
+        meta: { requiresAuth: true }
     },
 
     // error

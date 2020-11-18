@@ -40,7 +40,8 @@ export default {
         ...mapActions(['LOGOUT']),
 
         logout: function() {
-            this.LOGOUT().then(success => { this.$router.push('/auth/login'); console.log(success) });
+            this.LOGOUT();
+            this.$router.push('/auth/login');
         },
     }
 }
@@ -58,6 +59,7 @@ export default {
         height: 100px;
         background: $darker;
         z-index: 10000;
+        outline: rgb(40, 40, 40) 0.5px solid;
     }
 
     nav {

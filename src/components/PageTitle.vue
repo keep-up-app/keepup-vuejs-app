@@ -2,7 +2,12 @@
     <div id="title-container">
         <div class="content">
             <h1>{{ title }}</h1>
-            <router-link id="login-link" to="auth/login">Login</router-link><p>{{ message }}</p>
+            <div v-if="!isAuthed">
+                <router-link id="login-link" to="auth/login">Login</router-link><p> to {{ message }}</p>
+            </div>
+            <div v-else>
+                <p>Hello <strong>{{ Username }}</strong>, you can {{ message }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -12,7 +17,12 @@ export default {
     props: {
         title: String,
         message: String
-    }
+    },
+
+    computed: {
+        isAuthed: function(){ return this.$store.getters.isAuthenticated },
+        Username: function(){ return this.$store.getters.User['username'] }
+    },
 }
 </script>
 
