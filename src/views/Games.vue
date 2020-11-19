@@ -1,9 +1,17 @@
 <template>
     <div>
         <PageTitle title='Steam Games' message='see your games and game stats.'/>
-        <LoadingAnimation v-if="loading" />
-        <div v-bind:key="game.appid" v-for="game in games">
-            <GameItemListing v-bind:game="game" />
+        <div class="content">
+            <section class="space-top">
+                <div v-if="loading">
+                    <LoadingAnimation />
+                </div>
+                <div v-else>
+                    <div v-bind:key="game.appid" v-for="game in OwnedGames.games">
+                        <GameItemListing v-bind:game="game" />
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </template>
@@ -13,9 +21,9 @@
 import PageTitle from '@/components/PageTitle.vue'
 import GameItemListing from '@/components/GameItemListing.vue'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
-import Axios from 'axios';
 
 export default {
+
     name: 'Games',
     components: {
         PageTitle,
@@ -25,20 +33,24 @@ export default {
 
     data() {
         return {
-            games: [],
             loading: true
         }
     },
 
-    mounted() {
-        var steamid = '76561198272843849';
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    computed: {
+        OwnedGames: function() { return this.$store.getters.OwnedGames }
+    },
 
-        Axios.get(proxyurl + `https://game-api-endpoint.herokuapp.com/game/owned/${steamid}`)
-            .then(res => {
-                this.games = res.data.games
-                this.loading = false;
-            }).catch(err => console.error(err));    
+    created() {
+        this.$store.commit('SET_OWNED_GAMES', null);   
+    },
+
+    mounted() {
+        let steamid = this.$store.getters.User.steamid;
+        if (steamid) {
+            this.$store.dispatch('OWNED_GAMES', steamid);
+            this.loading = false;
+        }
     },
 }
 

@@ -2,7 +2,7 @@
     <div class="content">
         <div id="auth">
             <h1>LOGIN</h1>
-            <p class="space">Login with your <strong>Email</strong> to see what's new.</p>
+            <p>Login with your <strong>Email</strong> to see what's new.</p>
             <div class="message-box"><p :class="{ 'error' : error }">{{ error }}</p></div>
             <div id="auth-form" :class="{ 'disabled' : this.submitted }">
                 <form @submit.prevent="submit">

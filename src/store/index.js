@@ -1,13 +1,17 @@
-import Vuex from 'vuex';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import persistedstate from "vuex-persistedstate";
-import auth from './modules/user';
+import user from './modules/user';
+import game from './modules/game';
+import util from './modules/util';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
-        auth
+        user,
+        game,
+        util
     },
     plugins: [
         persistedstate()

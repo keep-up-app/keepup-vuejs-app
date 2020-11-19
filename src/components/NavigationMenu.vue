@@ -10,14 +10,14 @@
                         <li><router-link class="menu-link graceful" to="/about">About</router-link></li>
                     </ul>
                 </div>
-                <div class="center-v right" id="auth">
+                <div class="center-v right">
                     <ul v-if="!isAuthed">
                         <li><router-link class="btn" to="/auth/login">Sign In</router-link></li>
-                        <li><router-link class="btn-inverted" to="/auth/register">Register</router-link></li>
+                        <li><router-link class="margin-l btn-inverted" to="/auth/register">Register</router-link></li>
                     </ul>
                     <ul v-else>
                         <li><router-link class="btn" to="/account">{{ Username }}</router-link></li>
-                        <li><a @click="logout" class="btn-inverted">Logout</a></li>
+                        <li><a @click="logout" class="margin-l btn-inverted">Logout</a></li>
                     </ul>
                 </div>
             </nav>
@@ -33,7 +33,7 @@ export default {
 
     computed: {
         isAuthed: function(){ return this.$store.getters.isAuthenticated },
-        Username: function(){ return this.$store.getters.User['username'] }
+        Username: function(){ return this.$store.getters.User['username'] || "Unknown" }
     },
     
     methods: {
@@ -59,19 +59,13 @@ export default {
         height: 100px;
         background: $darker;
         z-index: 10000;
-        outline: rgb(40, 40, 40) 0.5px solid;
     }
 
     nav {
         width: 1000px;
         height: 100%;
     }
-
-    li {
-        display: inline;
-        margin: 0 5px;
-    }
-
+    
     #logo {
         position: absolute;
         top: 50%;

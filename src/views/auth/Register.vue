@@ -2,7 +2,7 @@
     <div class="content">
         <div id="auth">
             <h1>REGISTER</h1>
-            <p class="space">Sign up at <strong>KeepUp</strong> to see your Steam inventory's true value.</p>
+            <p>Sign up at <strong>KeepUp</strong> to see your Steam inventory's true value.</p>
             <div class="message-box"><p :class="{ 'error' : error }">{{ error }}</p></div>
             <div id="auth-form" :class="{ 'disabled' : submitted }">
                 <form @submit.prevent="submit">
@@ -51,7 +51,7 @@ export default {
                 }
             })
             .then(success => { this.$router.push('/auth/steam'); console.log(success) })
-            .catch(err => { this.error = err.response ? err.response.data.error : err; })
+            .catch(err => { this.error = err.response ? err.response.data.error : err })
             .finally(this.submitted = false);
         },
     },

@@ -2,11 +2,16 @@
     <div id="title-container">
         <div class="content">
             <h1>{{ title }}</h1>
-            <div v-if="!isAuthed">
-                <router-link id="login-link" to="auth/login">Login</router-link><p> to {{ message }}</p>
+            <div v-if="message">
+                <div v-if="!isAuthed">
+                    <router-link id="login-link" to="auth/login">Login</router-link><p> to {{ message }}</p>
+                </div>
+                <div v-else>
+                    <p>Hello <strong>{{ Username }}</strong>, you can {{ message }}</p>
+                </div>
             </div>
             <div v-else>
-                <p>Hello <strong>{{ Username }}</strong>, you can {{ message }}</p>
+                <p>This is the {{ title }} section.</p>
             </div>
         </div>
     </div>

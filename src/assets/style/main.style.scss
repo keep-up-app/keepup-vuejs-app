@@ -90,7 +90,11 @@
 }
 
 .space {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.space-top {
+    margin-top: 40px;
 }
 
 .center-h {
@@ -118,8 +122,7 @@
 }
 
 .simple-link {
-    position: absolute;
-    margin-top: 10px;
+    margin: 10px 0;
     font-size: 14px;
 }
 
@@ -127,6 +130,14 @@
     opacity: 0.025;
     width: auto;
     height: 100%;
+}
+
+.margin-l {
+    margin-left: 10px;
+}
+
+.margin-r {
+    margin-right: 10px;
 }
 
 .menu-link {
@@ -142,10 +153,20 @@
 
 .message-box {
     height: 30px;
+    margin: 20px 0;
 }
 
 .disabled {
     opacity: 0.5;
     user-select: none;
     pointer-events: none;
+}
+
+.vignet-box {
+    background: $light;
+    width: 100%;
+    height: auto;
+    border-radius: 7.5px;
+    padding: 20px;
+    margin: 40px 0;
 }
