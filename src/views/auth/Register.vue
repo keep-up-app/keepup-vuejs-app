@@ -4,7 +4,7 @@
             <h1>REGISTER</h1>
             <p>Sign up at <strong>KeepUp</strong> to see your Steam inventory's true value.</p>
             <div class="message-box"><p :class="{ 'error' : error }">{{ error }}</p></div>
-            <div id="auth-form" :class="{ 'disabled' : submitted }">
+            <div id="auth-form" :class="{ 'disabled' : this.submitted }">
                 <form @submit.prevent="submit">
                     <input placeholder="Email" type="text" v-model="form.email">
                     <input placeholder="Choose Password" type="password" v-model="form.choosePassword">
@@ -52,7 +52,7 @@ export default {
             })
             .then(success => { this.$router.push('/auth/steam'); console.log(success) })
             .catch(err => { this.error = err.response ? err.response.data.error : err })
-            .finally(this.submitted = false);
+            .finally(() => { this.submitted = false })
         },
     },
 }

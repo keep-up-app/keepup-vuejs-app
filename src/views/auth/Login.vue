@@ -41,13 +41,15 @@ export default {
             this.submitted = true;
             this.error = null;
 
+            console.log(this.submitted);
+
             this.LOGIN({
                 'email': this.form.email,
                 'password': this.form.password
             })
             .then(success => { this.$router.push('/'); console.log(success) })
             .catch(err => { this.error = err.response ? err.response.data.error : err })
-            .finally(this.submitted = false);
+            .finally(() => { this.submitted = false })
         }
     },
 }
