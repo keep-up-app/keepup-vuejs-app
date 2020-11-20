@@ -19,8 +19,6 @@
 
 <script>
 
-import { mapActions } from 'vuex';
-
 export default {
     name: 'Register',
 
@@ -37,20 +35,18 @@ export default {
     },
 
     methods: {
-        ...mapActions(['REGISTER']),
-
         submit: function() {
             this.submitted = true;
             this.error = null;
 
-            this.REGISTER({
+            this.$store.dispatch('REGISTER', {
                 'email': this.form.email,
                 'password': {
                     'first': this.form.choosePassword,
                     'second': this.form.repeatPassword
                 }
             })
-            .then(success => { this.$router.push('/auth/steam'); console.log(success) })
+            .then(() => { this.$router.push('/auth/steam') })
             .catch(err => { this.error = err.response ? err.response.data.error : err })
             .finally(() => { this.submitted = false })
         },

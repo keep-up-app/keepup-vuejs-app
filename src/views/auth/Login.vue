@@ -18,8 +18,6 @@
 
 <script>
 
-import { mapActions } from 'vuex';
-
 export default {
     name: 'Login',
 
@@ -35,19 +33,15 @@ export default {
     },
 
     methods: {
-        ...mapActions(['LOGIN']),
-        
         submit: function() {
             this.submitted = true;
             this.error = null;
 
-            console.log(this.submitted);
-
-            this.LOGIN({
+            this.$store.dispatch('LOGIN', {
                 'email': this.form.email,
                 'password': this.form.password
             })
-            .then(success => { this.$router.push('/'); console.log(success) })
+            .then(() => { this.$router.push('/') })
             .catch(err => { this.error = err.response ? err.response.data.error : err })
             .finally(() => { this.submitted = false })
         }

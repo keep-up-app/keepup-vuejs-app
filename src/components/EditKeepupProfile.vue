@@ -30,8 +30,6 @@
 
 <script>
 
-import { mapActions } from 'vuex';
-
 export default {
     props: {
         user: null
@@ -52,8 +50,6 @@ export default {
     },
 
     methods: {
-        ...mapActions(['UPDATE']),
-
         closeForm: function() { this.$store.dispatch('TOGGLE_EDIT_FORM') },
 
         submit: function() {
@@ -61,7 +57,7 @@ export default {
             this.success = null;
             this.submitted = true;
 
-            this.UPDATE({
+            this.$store.dispatch('UPDATE', {
                 'email': this.form.email,
                 'username': this.form.username,
                 'password': {
@@ -69,10 +65,9 @@ export default {
                     'second': this.form.repeatPassword
                 }
             })
-            .then(success => { 
-                console.log(success);
+            .then(() => { 
                 this.success = "Account information updated!";
-                setTimeout(() => this.$store.dispatch('TOGGLE_EDIT_FORM'), 500); 
+                setTimeout(() => this.closeForm(), 500); 
             })
             .catch(err => { this.error = err.response ? err.response.data.error : err })
             .finally(() => { this.submitted = false });
