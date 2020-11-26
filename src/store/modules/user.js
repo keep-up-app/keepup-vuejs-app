@@ -26,14 +26,14 @@ const getters = {
 const actions = {
     async REGISTER({ commit }, payload) {
         let res = await axios.post(cors + registerEndpoint, payload);
-        let user = res.data.data;
+        let user = res.data;
         Vue.$cookies.set('token', user['token']);
         commit('SET_USER', user);
     },
 
     async LOGIN({ commit }, payload) {
         let res = await axios.post(cors + loginEndpoint, payload);
-        let user = res.data.data;
+        let user = res.data;
         Vue.$cookies.set('token', user['token']);
         commit('SET_USER', user);
     },
@@ -41,7 +41,7 @@ const actions = {
     
     async UPDATE({ commit, getters }, payload) {
         let res = await axios.put(cors + userEndpoint + '/user/update', {
-            find: { email: getters.User['email'] },
+            find: { _id: getters.User['_id'] },
             with: payload
         }, { headers: { 'Authorization': getters.User['token'] } })
         commit('SET_USER', res.data);

@@ -50,6 +50,12 @@ const routes = [
         meta: { guest: true }
     },
     {
+        path: '/auth/token',
+        name: 'Two Factor Authentication',
+        component: () => import('../views/auth/TwoFactorAuth.vue'),
+        meta: { guest: true }
+    },
+    {
         path: '/auth/steam',
         name: 'Steam Auth',
         component: () => import('../views/auth/Steam.vue'),
@@ -73,13 +79,16 @@ const router = new VueRouter({
   
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (store.getters.isAuthenticated) {
-            next();
-            return;
-        }
-        next('auth/login');
-    } else next();
+    if (to.matched.some((record) => record.meta.guest))
+        if (store.getters.isAuthenticated) return next('account');
+    next();
+});
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.requiresAuth))
+        if (!store.getters.isAuthenticated) return next('auth/login');
+    next();
 });
 
 

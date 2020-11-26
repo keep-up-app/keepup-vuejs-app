@@ -36,7 +36,7 @@ export default {
         if (dataUrl) {
             let steamid = dataUrl.substring(dataUrl.lastIndexOf('/') + 1);
             if (steamid) this.$store.dispatch('UPDATE', { 'steamid': steamid })
-                .then(success => { this.$router.push('/account'); console.log(success) })
+                .then(() => this.$router.push('/account'))
                 .catch(err => { this.error = err.response ? err.response.data.error : err; })
         }
     },

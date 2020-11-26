@@ -16,7 +16,11 @@
                         <p>Choose Password:</p>
                         <input type="password" v-model="form.choosePassword" placeholder="Choose Password">
                         <p>Repeat Password:</p>
-                        <input class="space" type="password" v-model="form.repeatPassword" placeholder="Repeat Password">
+                        <input type="password" v-model="form.repeatPassword" placeholder="Repeat Password">
+                        <div class="vignet-box">
+                            <input class="checkbox" type="checkbox" id="2fa" v-model="form.auth.enabled">
+                            <label for="2fa">Enable <strong>Two Factor Authentification</strong></label>
+                        </div>
                         <ul class="space-top">
                             <li><button type="submit" class="margin-r btn">Save</button></li>
                             <li><button @click="closeForm" class="margin-r btn-inverted">Cancel</button></li>
@@ -44,7 +48,10 @@ export default {
                 email: this.$props.user.email,
                 username: this.$props.user.username,
                 choosePassword: '',
-                repeatPassword: ''
+                repeatPassword: '',
+                auth: {
+                    enabled:  this.$props.user.auth.enabled
+                }
             }
         }
     },
@@ -63,6 +70,9 @@ export default {
                 'password': {
                     'first': this.form.choosePassword,
                     'second': this.form.repeatPassword
+                },
+                'auth': {
+                    'enabled': this.form.auth.enabled
                 }
             })
             .then(() => { 

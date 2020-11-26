@@ -42,7 +42,14 @@ export default {
                 'password': this.form.password
             })
             .then(() => { this.$router.push('/') })
-            .catch(err => { this.error = err.response ? err.response.data.error : err })
+            .catch(err => { 
+                this.error = err.response ? err.response.data.error : err;
+                if (this.error == 'Missing Token.') {
+                    console.log(err.response.data.details);
+                    this.$router.push('/auth/token?_id=' + err.response.data.details._id);
+                    this.error = null;
+                }
+            })
             .finally(() => { this.submitted = false })
         }
     },
