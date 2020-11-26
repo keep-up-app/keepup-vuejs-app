@@ -4,13 +4,16 @@
 
 const express = require('express');
 const serveStatic = require('serve-static');
+const history = require('connect-history-api-fallback');
 const path = require('path');
 
 
 /**
  * Creating new Express app.
  */
+
 const app = express();
+app.use(history());
 
 
 /**
