@@ -4,8 +4,8 @@
             <div id="edit-form">
                 <h3>Edit Account</h3>
                 <div class="message-box">
-                    <div v-if="error != null"><p class="error">{{ error }}</p></div>
-                    <div v-if="success != null"><p class="success">{{ success }}</p></div>
+                    <div v-if="error"><p class="error">{{ error }}</p></div>
+                    <div v-if="success"><p class="success">{{ success }}</p></div>
                 </div>
                 <div :class="{ 'disabled' : this.submitted }">
                     <form @submit.prevent="submit">

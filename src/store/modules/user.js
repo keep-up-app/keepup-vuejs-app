@@ -40,6 +40,7 @@ const actions = {
 
     
     async UPDATE({ commit, getters }, payload) {
+        console.log(getters.User['token']) 
         let res = await axios.put(cors + userEndpoint + '/user/update', {
             find: { _id: getters.User['_id'] },
             with: payload

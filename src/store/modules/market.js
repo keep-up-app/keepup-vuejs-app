@@ -6,20 +6,16 @@ const marketEndpoint = 'https://market-api-endpoint.herokuapp.com/';
 
 
 const state = {
-    next: null,
-    previous: null,
-    first: null,
-    last: null,
-    items: []
+    data: null,
+    links: null,
+    meta: null,
 };
 
 
 const getters = {
-    getNextPage: state => state.next,
-    getPreviousPage: state => state.previous,
-    getFirstPage: state => state.first,
-    getLastPage: state => state.last,
-    MarketItems: state => state.items
+    getData: state => state.data,
+    getLinks: state => state.links,
+    getMeta: state => state.meta,
 };
 
 
@@ -27,35 +23,25 @@ const actions = {
     ITEMS_FROM_GAMES({ commit }, appid) {
         axios.get(cors + marketEndpoint + '/item/all/' + appid)
             .then(res => {
-                commit('SET_GAME_ITEMS', res.data.data);
-                commit('SET_FIRST_PAGE', res.data.links.first);
-                commit('SET_LAST_PAGE', res.data.links.last);
-                commit('SET_NEXT_PAGE', res.data.next);
-                commit('SET_PREVIOUS_PAGE', res.data.previous);
+                commit('SET_DATA', res.data.data);
+                commit('SET_LINKS', res.data.links);
+                commit('SET_META', res.data.meta);
             });
     },
 };
 
 
 const mutations = {
-    SET_GAME_ITEMS(state, items) {
-        state.items = items;
+    SET_DATA(state, data) {
+        state.data = data;
     },
 
-    SET_FIRST_PAGE(state, page) {
-        state.first = page;
+    SET_LINKS(state, links) {
+        state.links = links;
     },
 
-    SET_LAST_PAGE(state, page) {
-        state.last = page;
-    },
-
-    SET_NEXT_PAGE(state, page) {
-        state.next = page;
-    },
-
-    SET_PREVIOUS_PAGE(state, page) {
-        state.previous = page;
+    SET_META(state, meta) {
+        state.meta = meta;
     },
 };
 

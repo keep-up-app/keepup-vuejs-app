@@ -32,11 +32,13 @@ export default {
     },
 
     computed: {
-        Items: function() { return this.$store.getters.MarketItems }
+        Items: function() { return this.$store.getters.getData },
+        Links: function() { return this.$store.getters.getLinks },
+        Meta: function() { return this.$store.getters.getMeta },
     },
 
     created() {
-        this.$store.commit('SET_GAME_ITEMS', null);
+        this.$store.commit('SET_DATA', null);
     },
 
     mounted() {

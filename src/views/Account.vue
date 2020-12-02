@@ -20,7 +20,7 @@
 								</div>
 								<div class="grid2">
 									<h2>{{ SteamProfile.username }}</h2>
-									<div><a id="link-page" class="simple-link" :href="SteamProfile.page" target="_blank">View Steam Profile ↗</a></div>
+									<div><a class="simple-link link" :href="SteamProfile.page" target="_blank">View Steam Profile ↗</a></div>
 									<hr>
 									<div class="description">
 										<div>Joined Steam: <strong>{{ SteamProfile.created_at.date }}</strong> ({{ SteamProfile.created_at.duration }})</div>
@@ -50,26 +50,21 @@
 				<section>
 					<div class="vignet-box">
 						<p>It looks like you haven't connected your <strong>Steam Profile</strong> to your account yet.</p>
-						<router-link class="btn-special" id="btn-right-link" to="auth/steam">Link Steam</router-link>
+						<router-link class="btn-special btn-right" to="auth/steam">Link Steam</router-link>
 					</div>
-					<div class="center-h"><p >Nothing special to see here...</p></div>
 				</section>
 			</div>
 		</section>
-		<section v-if="true">
-			<hr>
-			<div class="vignet-box-danger">
-				<h2 class="space">Danger Zone</h2>
-				<p>Unlink Steam account - <strong>This will remove the current Steam account off of this account</strong>.</p>
-				<hr>
-				<form @submit.prevent="removeSteam">
-					<button class="btn-danger space">Remove Steam</button>
-				</form>
-				<p>Delete account - <strong>Deleting your account is permantent</strong>.</p>
-				<hr>
-				<form @submit.prevent="deleteAccount">
-					<button class="btn-danger">Delete account</button>
-				</form>
+		<section v-if="SteamProfile">
+			<div class="vignet-box">
+				<p>Remove your linked Steam account from KeepUp, you can always add your account back.</p>
+				<button @click="removeSteam" class="btn-right btn-danger space">Remove Steam</button>
+			</div>
+		</section>
+		<section>
+			<div class="vignet-box">
+				<p>Deleting your KeepUp account is <strong>permanent</strong> and cannot be reversed.</p>
+				<button @click="deleteAccount" class="btn-right btn-danger space">Delete Account</button>
 			</div>
 		</section>
 	</div>
@@ -128,8 +123,14 @@ export default {
 
 	methods: {
 		showEdit: function() { this.$store.dispatch('TOGGLE_EDIT_FORM', true) },
-		removeSteam: function() { this.$store.dispatch('UPDATE', { steamid: null }) },
-		deleteAccount: function() { this.$store.dispatch('DELETE_ACCOUNT'); }
+		removeSteam: function() { 
+			this.$router.go('/auth/login');
+			this.$store.dispatch('UPDATE', { steamid: null });
+		},
+		deleteAccount: function() { 
+			this.$router.go('/auth/login');
+			this.$store.dispatch('DELETE_ACCOUNT');
+		},
 	}
 }
 
@@ -146,12 +147,9 @@ export default {
 		border-radius: 5px;
 	}
 
-	#btn-right-link {
-		margin-left: 305px;
-	}
-
-	#link-page {
-		color: $link;
+	.btn-right {
+		position: absolute;
+		right: 20px;
 	}
 
 	.grid {
