@@ -40,8 +40,8 @@ export default {
         ...mapActions(['LOGOUT']),
 
         logout: function() {
-            this.LOGOUT();
             this.$router.push('/auth/login');
+            this.LOGOUT();
         },
     }
 }
@@ -50,8 +50,7 @@ export default {
 
 <style lang="scss" scoped>
   
-    $dark: #1b2838;
-    $darker: #171a21;
+    @import '@/assets/style/variables.scss';
     
     #nav-container {
         position: fixed;

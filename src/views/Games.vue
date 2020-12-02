@@ -3,7 +3,7 @@
         <PageTitle title='Steam Games' message='see your games and game stats.'/>
         <div class="content">
             <section class="space-top">
-                <div v-if="loading">
+                <div v-if="OwnedGames == null">
                     <LoadingAnimation />
                 </div>
                 <div v-else>
@@ -31,12 +31,6 @@ export default {
         LoadingAnimation
     },
 
-    data() {
-        return {
-            loading: true
-        }
-    },
-
     computed: {
         OwnedGames: function() { return this.$store.getters.OwnedGames }
     },
@@ -47,10 +41,7 @@ export default {
 
     mounted() {
         let steamid = this.$store.getters.User.steamid;
-        if (steamid) {
-            this.$store.dispatch('OWNED_GAMES', steamid);
-            this.loading = false;
-        }
+        if (steamid) this.$store.dispatch('OWNED_GAMES', steamid);
     },
 }
 

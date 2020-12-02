@@ -42,7 +42,7 @@ export default {
     },
 
     methods: {
-        getLink: function() { return window.location.origin + this.$route.fullPath }
+        getLink: function() { return window.location.origin + this.$route.fullPath },
     },
 }
 
@@ -52,9 +52,11 @@ export default {
     
     #auth {
         position: relative;
-        top: 100px;
-        height: 475px;
+        height: 450px;
         width: 30%;
+        left: 50%;
+        top: 35vh;
+        transform: translate(-50%, -50%);
     }
 
     #auth-form {

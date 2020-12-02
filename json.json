@@ -8,3 +8,4 @@
 {"user":{"user":null,"steamid":null,"steamProfile":null},"game":{"owned":[],"recent":[]},"util":{"edit":false}}
 {"user":{"user":null,"steamProfile":null,"steamid":null},"game":{"owned":[],"recent":[]},"util":{"edit":false}}
 {"user":{"user":null,"steamProfile":null,"steamid":null},"game":{"owned":[],"recent":[]},"util":{"edit":false}}
+{"user":{"user":null,"steamProfile":null},"game":{"owned":[],"recent":[]},"util":{"edit":false,"twoFactorAuth":false}}

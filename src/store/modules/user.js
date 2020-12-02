@@ -60,6 +60,14 @@ const actions = {
         axios.get(cors + steamEndpoint + '/steam/user/profile/' + steamid)
             .then(res => commit('SET_STEAM_PROFILE', res.data));
     },
+
+    async DELETE_ACCOUNT({ getters, dispatch }) {
+        let res = await axios.delete(cors + userEndpoint + '/user/destroy', {
+            _id: getters.User['_id']
+        }, { headers: { 'Authorization': getters.User['token'] } })
+        dispatch('LOGOUT');
+        return res.data.message;
+    }
 };
 
 

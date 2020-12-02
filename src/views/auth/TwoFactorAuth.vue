@@ -8,7 +8,7 @@
             <div id="auth-form" :class="{ 'disabled' : this.submitted }">
                 <form @submit.prevent="submit">
                     <input type="hidden" v-model="form._id">
-                    <input placeholder="6-Digit Token" type="text" v-model="form.token">
+                    <input placeholder="6-Digit Code" type="text" v-model="form.token">
                     <button class="btn large">Authenticate</button>
                 </form>
                 <router-link class="btn-inverted large" to="/market">Cancel</router-link>

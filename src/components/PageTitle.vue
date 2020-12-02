@@ -33,10 +33,12 @@ export default {
 
 <style lang="scss" scoped>
     
+    @import '@/assets/style/variables.scss';
+
     #title-container {
         width: 100%;
         height: 130px;
-        background: linear-gradient(#3c8030, #489c39);
+        background: $green;
     }
 
     h1 {

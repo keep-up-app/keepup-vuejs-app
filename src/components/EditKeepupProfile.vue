@@ -89,6 +89,8 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/assets/style/variables.scss';
+
     #overlay {
         position: fixed;
         z-index: 1000;
@@ -106,7 +108,7 @@ export default {
         transform: translate(-50%, -50%);
         width: 500px;
         height: auto;
-        background: #1b2838;
+        background: $dark;
         border-radius: 7.5px;
     }
 

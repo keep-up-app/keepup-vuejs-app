@@ -32,6 +32,7 @@
 }
 
 .btn-inverted,
+.btn-danger,
 .btn-special,
 .btn {
     user-select: none;
@@ -54,6 +55,11 @@
     border: white 2px solid;
 }
 
+.btn-danger {
+    border: $red 2px solid;
+    background: $red;
+}
+
 .btn {
     border: $theme 2px solid;
     background: $theme;
@@ -66,6 +72,7 @@
 
 .btn:hover,
 .btn-special:hover,
+.btn-danger:hover,
 .btn-inverted:hover,
 .simple-link:hover {
     transition: ease-in 150ms;
@@ -162,6 +169,14 @@
     pointer-events: none;
 }
 
+.checkbox {
+    position: relative;
+    width: auto;
+    height: 30px;
+    transform: translateY(30%);
+    margin-right: 15px;
+}
+
 .vignet-box {
     background: $light;
     width: 100%;
@@ -171,10 +186,11 @@
     margin: 40px 0;
 }
 
-.checkbox {
-    position: relative;
-    width: auto;
-    height: 30px;
-    transform: translateY(30%);
-    margin-right: 15px;
+.vignet-box-danger {
+    width: 100%;
+    height: auto;
+    border-radius: 7.5px;
+    border: $red 2px solid;
+    padding: 20px;
+    margin: 40px 0;
 }

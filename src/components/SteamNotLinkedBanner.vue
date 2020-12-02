@@ -17,12 +17,14 @@ export default {
 
 <style lang="scss" scoped>
     
+    @import '@/assets/style/variables.scss';
+
     #banner {
         position: fixed;
         bottom: 0;
         width: 100%;
         height: 60px;
-        background: #171a21;
+        background: $darker;
     }
 
     #banner-content {
