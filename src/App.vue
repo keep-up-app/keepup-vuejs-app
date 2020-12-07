@@ -37,6 +37,7 @@ export default {
 
 <style lang="scss">
     @import '@/assets/style/variables.scss';
+    @import '@/assets/style/animations.scss';
     @import '@/assets/style/font.style.scss';
     @import '@/assets/style/default.style.scss';
     @import '@/assets/style/main.style.scss';

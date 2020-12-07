@@ -1,7 +1,7 @@
 <template>
 	<div class="content space-top">
 		<section class="space-top">
-			<section>
+			<section v-if="User">
 				<button class="btn-inverted right" @click="showEdit">Edit Profile</button>
 				<h2>{{ User.username }}</h2>
 				<div>Joined: <strong>{{ User.created_at }}</strong></div>
@@ -56,13 +56,13 @@
 			</div>
 		</section>
 		<section v-if="SteamProfile">
-			<div class="vignet-box">
+			<div class="vignet-box" :class="{ 'disabled' : this.submittedRemove }">
 				<p>Remove your linked Steam account from KeepUp, you can always add your account back.</p>
-				<button @click="removeSteam" class="btn-right btn-danger space">Remove Steam</button>
+				<button @click="removeSteam" class="btn-right btn-danger space">Unlink Steam</button>
 			</div>
 		</section>
 		<section>
-			<div class="vignet-box">
+			<div class="vignet-box" :class="{ 'disabled' : this.submittedDelete }">
 				<p>Deleting your KeepUp account is <strong>permanent</strong> and cannot be reversed.</p>
 				<button @click="deleteAccount" class="btn-right btn-danger space">Delete Account</button>
 			</div>
@@ -81,6 +81,13 @@ export default {
 	components: {
 		GameItemListing,
 		LoadingAnimation
+	},
+
+	data() {
+		return {
+            submittedDelete: false,
+            submittedRemove: false,
+		}
 	},
 
 	computed: {
@@ -123,13 +130,20 @@ export default {
 
 	methods: {
 		showEdit: function() { this.$store.dispatch('TOGGLE_EDIT_FORM', true) },
-		removeSteam: function() { 
-			this.$router.go('/auth/login');
+		removeSteam: function() {
+			this.submittedRemove = true;
 			this.$store.dispatch('UPDATE', { steamid: null });
+			this.submittedRemove = false;
 		},
-		deleteAccount: function() { 
-			this.$router.go('/auth/login');
-			this.$store.dispatch('DELETE_ACCOUNT');
+		deleteAccount: function() {
+			if (confirm("Are you sure you want to delete your account?")) {
+				this.submittedDelete = true;
+				setTimeout(() => {
+					this.$store.dispatch('DELETE');
+					this.$store.dispatch('LOGOUT');
+					this.$router.push('/auth/login');
+				}, 1000);
+			}
 		},
 	}
 }

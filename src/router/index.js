@@ -67,7 +67,7 @@ const routes = [
     {
         path: '*',
         name: '404 - Page Not Found.',
-        component: () => import('../views/error/404.vue')
+        component: () => import('../views/error/E404.vue')
     }
 ];
 

@@ -25,6 +25,7 @@ export default {
         width: 100%;
         height: 60px;
         background: $darker;
+        z-index: 1000;
     }
 
     #banner-content {

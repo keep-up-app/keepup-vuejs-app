@@ -1,8 +1,8 @@
 <template>
     <div class="noselect game-item-box">
-        <img class="bg-blured" v-bind:src="game.banner" :alt="game.banner">
+        <CaseImageNotFound class="bg-blured" :url="game.banner" />
         <div class="game-description">
-            <img v-bind:src="game.logo" alt="">
+            <CaseImageNotFound :url="game.logo" />
             <h1>{{ game.name }}</h1>
             <div>Recent: {{ game.playtime.recent.text }}</div>
             <div>Total: {{ game.playtime.text }}</div>
@@ -12,7 +12,12 @@
 
 <script>
 
+import CaseImageNotFound from '@/components/CaseImageNotFound.vue';
+
 export default {
+    components: {
+        CaseImageNotFound
+    },
     props: {
         game: {}
     },
@@ -53,7 +58,6 @@ export default {
 
     .game-item-box:hover {
         height: 200px;
-
     }
 
     .game-item-box:hover > img {

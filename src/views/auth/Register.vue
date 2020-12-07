@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content fade-in">
         <div id="auth">
             <h1>REGISTER</h1>
             <p>Sign up at <strong>KeepUp</strong> to see your Steam inventory's true value.</p>

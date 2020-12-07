@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content fade-in">
         <div id="auth">
             <h1>KEEPUP GUARD</h1>
             <p>Two factor authentication is enabled on this account.</p>

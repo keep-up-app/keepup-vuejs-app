@@ -13,34 +13,34 @@ const state = {
 
 
 const getters = {
-    getData: state => state.data,
-    getLinks: state => state.links,
-    getMeta: state => state.meta,
+    getItemData: state => state.data,
+    getItemLinks: state => state.links,
+    getItemMeta: state => state.meta,
 };
 
 
 const actions = {
-    ITEMS_FROM_GAMES({ commit }, appid) {
-        axios.get(cors + marketEndpoint + '/item/all/' + appid)
+    ITEMS_FROM_GAME({ commit }, appid, page = 1) {
+        axios.get(cors + marketEndpoint + '/item/all/' + appid + '?page=' + page)
             .then(res => {
-                commit('SET_DATA', res.data.data);
-                commit('SET_LINKS', res.data.links);
-                commit('SET_META', res.data.meta);
+                commit('SET_ITEM_DATA', res.data.data);
+                commit('SET_ITEM_LINKS', res.data.links);
+                commit('SET_ITEM_META', res.data.meta);
             });
     },
 };
 
 
 const mutations = {
-    SET_DATA(state, data) {
+    SET_ITEM_DATA(state, data) {
         state.data = data;
     },
 
-    SET_LINKS(state, links) {
+    SET_ITEM_LINKS(state, links) {
         state.links = links;
     },
 
-    SET_META(state, meta) {
+    SET_ITEM_META(state, meta) {
         state.meta = meta;
     },
 };

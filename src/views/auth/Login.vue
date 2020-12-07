@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content fade-in">
         <div id="auth">
             <h1>LOGIN</h1>
             <p>Login with your <strong>Email</strong> to see what's new.</p>

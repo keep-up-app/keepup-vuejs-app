@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content fade-in-left">
         <div id="auth">
             <h1>LINK YOUR STEAM ACCOUNT</h1>
             <p class="space">Link your <strong>Steam</strong> to view your game stats, invenetory and more.</p>

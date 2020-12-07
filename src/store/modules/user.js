@@ -38,14 +38,21 @@ const actions = {
         commit('SET_USER', user);
     },
 
-    
+    async DELETE({ getters, dispatch }) {
+        let res = await axios.delete(cors + userEndpoint + '/user/destroy', {
+            _id: getters.User['_id']
+        }, { headers: { 'Authorization': getters.User['token'] } })
+        dispatch('LOGOUT');
+        return res.data.message;
+    },
+
     async UPDATE({ commit, getters }, payload) {
-        console.log(getters.User['token']) 
         let res = await axios.put(cors + userEndpoint + '/user/update', {
             find: { _id: getters.User['_id'] },
             with: payload
         }, { headers: { 'Authorization': getters.User['token'] } })
         commit('SET_USER', res.data);
+        commit('SET_STEAM_PROFILE', res.data.steamid);
     },
     
     LOGOUT({ commit, dispatch }) {
@@ -59,16 +66,9 @@ const actions = {
 
     STEAM_PROFILE({ commit }, steamid) {
         axios.get(cors + steamEndpoint + '/steam/user/profile/' + steamid)
-            .then(res => commit('SET_STEAM_PROFILE', res.data));
+            .then(res => commit('SET_STEAM_PROFILE', res.data))
+            .catch(() => commit('SET_STEAM_PROFILE', null));
     },
-
-    async DELETE_ACCOUNT({ getters, dispatch }) {
-        let res = await axios.delete(cors + userEndpoint + '/user/destroy', {
-            _id: getters.User['_id']
-        }, { headers: { 'Authorization': getters.User['token'] } })
-        dispatch('LOGOUT');
-        return res.data.message;
-    }
 };
 
 
