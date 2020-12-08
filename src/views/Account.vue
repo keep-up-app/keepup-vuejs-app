@@ -1,5 +1,5 @@
 <template>
-	<div class="content space-top">
+	<div class="content">
 		<section class="space-top">
 			<section v-if="User">
 				<button class="btn-inverted right" @click="showEdit">Edit Profile</button>
@@ -25,7 +25,7 @@
 									<div class="description">
 										<div>Joined Steam: <strong>{{ SteamProfile.created_at.date }}</strong> ({{ SteamProfile.created_at.duration }})</div>
 										<div>Status: <strong>{{ SteamProfile.status.text }}</strong> <span class="dot" :class="StatusColor"></span></div>
-										<div>Since: <strong>{{ SteamProfile.last_online }}</strong></div>
+										<div>Last Offline: <strong>{{ SteamProfile.last_online }}</strong></div>
 									</div>
 								</div>
 							</div>
@@ -33,14 +33,19 @@
 					</section>
 					<section>
 						<div v-if="RecentlyPlayed" class="vignet-box">
-							<h2>Recently Played Titles</h2>
+							<h2>Recent Activty</h2>
 							<hr>
 							<div class="description space">
 								<div>Playtime for the past two weeks: <strong>{{ RecentlyPlayed.playtime.total }} Hours</strong></div>
 								<div>Current favorite: <strong>{{ CurrentFavorite.name }}</strong> ({{ CurrentFavorite.playtime.recent.text }})</div>
 							</div>
-							<div v-bind:key="game.appid" v-for="game in RecentlyPlayed.games">
-								<GameItemListing v-bind:game="game" />
+							<h3>Recently Played Titles</h3>
+							<div class="portrait-carousel">
+								<ul>
+									<li v-bind:key="game.appid" v-for="game in RecentlyPlayed.games">
+										<GameBannerItemListing v-bind:game="game" />
+									</li>
+								</ul>
 							</div>
 						</div>
 					</section>
@@ -72,14 +77,14 @@
 
 <script>
 
-import GameItemListing from '@/components/GameItemListing.vue';
+import GameBannerItemListing from '@/components/GameBannerItemListing.vue';
 import LoadingAnimation from '@/components/LoadingAnimation.vue';
 
 export default {
 
 	name: 'Account',
 	components: {
-		GameItemListing,
+		GameBannerItemListing,
 		LoadingAnimation
 	},
 

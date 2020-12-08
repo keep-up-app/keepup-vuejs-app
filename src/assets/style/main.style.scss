@@ -190,3 +190,46 @@
 .link {
     color: $link;
 }
+
+.portrait-carousel {
+    overflow: auto;
+    width: 100%;
+    ul {
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    li {
+        display: inline-block;
+        margin-right: 5px;
+    }
+    
+    ::-webkit-scrollbar {
+        height: 12px;
+        border-radius: 100%;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgba( white, 0.25); 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(white, 0.20); 
+    }
+}
+
+.item-select {
+    border: solid transparent 2px;
+    transition: all 100ms ease-out;
+}
+
+.item-select:hover {
+    border: solid white 2px;
+}

@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="gamePageLink" class="noselect game-item-box">
+    <router-link :to="gamePageLink" class="noselect item-select game-item-box">
         <CaseImageNotFound class="bg-blured" :url="game.banner" />
         <div class="game-description">
             <CaseImageNotFound :url="game.logo" />
@@ -30,15 +30,17 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/assets/style/variables.scss';
+
     .game-item-box {
         cursor: pointer;
         position: relative;
         display: inline-block;
         margin: 10px 0;
-        width: 100%;
-        height: 150px;
+        width: 200px;
+        height: 300px;
         overflow: hidden;
-        transition: all 150ms ease-out;
+        border-radius: 7.5px;
     }
 
     .game-description {
@@ -55,18 +57,13 @@ export default {
 
     .bg-blured {
         z-index: -1000;
-        width: 100%;
-        filter: blur(10px);
-    }
-
-    .game-item-box:hover {
-        height: 160px;
+        height: 100%;
+        filter: blur(5px);
     }
 
     .game-item-box:hover > img {
         z-index: -1000;
-        width: 100%;
-        filter: blur(10px) contrast(110%);
+        filter: blur(5px);
     }
 
     h1 {
@@ -74,7 +71,7 @@ export default {
         margin-left: 20px;
         font-family: 'Verdana';
         font-weight: bolder;
-        font-size: 35px;
+        font-size: 20px;
         margin-bottom: 10px;
     }
 

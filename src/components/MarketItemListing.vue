@@ -1,5 +1,5 @@
 <template>
-    <div class="grid">
+    <div class="item-select grid">
         <div>
             <div class="icon-container">
                 <CaseImageNotFound class="noselect item-thumbnail" :url="item.item_icon" />

@@ -24,6 +24,11 @@ const routes = [
         component: () => import('../views/Games.vue'),
     },
     {
+        path: '/games/:appid',
+        name: 'GameInfo',
+        component: () => import('../views/GameInfo.vue'),
+    },
+    {
         path: '/market',
         name: 'Maket',
         component: () => import('../views/Market.vue'),
@@ -68,7 +73,7 @@ const routes = [
         path: '*',
         name: '404 - Page Not Found.',
         component: () => import('../views/error/E404.vue')
-    }
+    },
 ];
 
 
