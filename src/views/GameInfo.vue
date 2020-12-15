@@ -1,16 +1,31 @@
 <template>
-	<div class="content">
-        <div v-if="!Game && !error">
-            <LoadingAnimation />
-        </div>
-        <div v-else>
-            <div v-if="error" class="space-top">
-                <p class="center-h">Could not load game data with appid: <strong>{{ error.game }}</strong></p>
-                <button class="space-top center-h btn-inverted" @click="$router.go(-1)">Back</button>
+    <div>
+        <img v-if="Game" class="noselect bg" :src="Game.background" alt="">
+        <div class="content">
+            <div v-if="!Game && !error">
+                <LoadingAnimation />
             </div>
             <div v-else>
-                <img class="noselect bg" :src="Game.background" alt="">
-                {{ Game }}
+                <div v-if="error" class="space-top">
+                    <p class="center-h">Could not load game data with appid: <strong>{{ error.game }}</strong></p>
+                    <button class="space-top center-h btn-inverted" @click="$router.go(-1)">Back</button>
+                </div>
+                <div v-else>
+                    <section class="space-top">
+                        <h2>{{ Game.name.toUpperCase() }}</h2>
+                        <p id="price-tag" class="right"><strong>{{ Game.price_text }}</strong></p>
+                        <p>Developed & Published by: <strong>{{ getPublisherList(Game.publishers) }}</strong></p>
+                        <div class="small-space"><a class=" simple-link link" target="blank" :href="'https://store.steampowered.com/app/' + Game.appid">View Steam Page ↗</a></div>
+                        <hr>
+                        <img :src="Game.banner">
+                        <p class="game-description">{{ Game.description.replace('amp;', '&') }}</p>
+
+                        <img class="icon-os" v-if="Game.platforms.mac" src="@/assets/images/icons/os/mac.png" alt="mac">
+                        <img class="icon-os" v-if="Game.platforms.linux" src="@/assets/images/icons/os/linux.png" alt="linux">
+                        <img class="icon-os" v-if="Game.platforms.windows" src="@/assets/images/icons/os/windows.png" alt="windows">
+                    </section>
+                    <section><pre>{{ Game }}</pre></section>
+                </div>
             </div>
         </div>
     </div>
@@ -46,6 +61,17 @@ export default {
         this.$store.dispatch('GAME_INFO', appid)
             .catch(err => this.error = { game: appid, message: err });
     },
+    
+    methods: {
+        getPublisherList: function(publishers = []) { 
+            var publisherList = "";
+            for (const index in publishers)
+                publisherList += publishers[index] + ", ";
+            return publishers.length > 0 
+                ? publisherList.replace(/,\s*$/, "") 
+                : "Unknown";
+        }
+    },
 }
 
 </script>
@@ -55,11 +81,26 @@ export default {
     @import '@/assets/style/variables.scss';
 
     .bg {
-        position: absolute;
+        position: fixed;
         top: 0;
-        left: -50%;
+        left: 0;
         object-fit: cover;
-        width: 80vw;
+        height: 100vh;
         z-index: -100;
     }
+
+    .game-description {
+        font-size: 16px;
+    }
+
+    .icon-os {
+        margin: 10px 5px;
+        height: 25px;
+        filter: invert(1);
+    }
+
+    #price-tag {
+        font-size: 18px;
+    }
+
 </style>

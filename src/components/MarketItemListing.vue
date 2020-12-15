@@ -43,7 +43,7 @@ export default {
 
     .grid {
         display: grid;
-		grid-template-columns: 10% 44% 20% 20%;
+		grid-template-columns: 70px 44% 20% 20%; // change first param to adjust listing height
 		grid-gap: 2%;
         width: 100%;
         background: $light;
@@ -51,6 +51,11 @@ export default {
         margin-bottom: 15px;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
     }
 
     .grid-center-content {

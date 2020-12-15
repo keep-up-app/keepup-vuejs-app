@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="gamePageLink" class="noselect item-select game-item-box">
+    <router-link :to="'/games/' + this.$props.game.appid" class="noselect item-select game-item-box">
         <CaseImageNotFound class="bg-blured" :url="game.banner" />
         <div class="game-description">
             <CaseImageNotFound :url="game.logo" />
@@ -21,9 +21,6 @@ export default {
     props: {
         game: {}
     },
-    computed: {
-        gamePageLink: function() { return '/games/' + this.$props.game.appid; }
-    }
 }
 
 </script>

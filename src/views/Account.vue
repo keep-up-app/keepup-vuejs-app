@@ -4,7 +4,7 @@
 			<section v-if="User">
 				<button class="btn-inverted right" @click="showEdit">Edit Profile</button>
 				<h2>{{ User.username }}</h2>
-				<div>Joined: <strong>{{ User.created_at }}</strong></div>
+				<p>Joined: <strong>{{ User.created_at }}</strong></p>
 				<hr>
 			</section>
 			<div v-if="isSteamAuth">
@@ -20,7 +20,7 @@
 								</div>
 								<div class="grid2">
 									<h2>{{ SteamProfile.username }}</h2>
-									<div><a class="simple-link link" :href="SteamProfile.page" target="_blank">View Steam Profile ↗</a></div>
+									<a class="simple-link link" :href="SteamProfile.page" target="_blank">View Steam Profile ↗</a>
 									<hr>
 									<div class="description">
 										<div>Joined Steam: <strong>{{ SteamProfile.created_at.date }}</strong> ({{ SteamProfile.created_at.duration }})</div>
@@ -37,7 +37,7 @@
 							<hr>
 							<div class="description space">
 								<div>Playtime for the past two weeks: <strong>{{ RecentlyPlayed.playtime.total }} Hours</strong></div>
-								<div>Current favorite: <strong>{{ CurrentFavorite.name }}</strong> ({{ CurrentFavorite.playtime.recent.text }})</div>
+								<div>Recent favorite: <strong>{{ CurrentFavorite.name }}</strong> ({{ CurrentFavorite.playtime.recent.text }})</div>
 							</div>
 							<h3>Recently Played Titles</h3>
 							<div class="portrait-carousel">

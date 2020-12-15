@@ -7,6 +7,7 @@
                     <LoadingAnimation />
                 </div>
                 <div v-else>
+                    <h2>Showing Market Items for <b>Rust</b></h2>
                     <div id="main-listing">
                         <div class="grid-list-legend">
                             <div><p>Item</p></div>

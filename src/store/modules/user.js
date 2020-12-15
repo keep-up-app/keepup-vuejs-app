@@ -27,21 +27,21 @@ const actions = {
     async REGISTER({ commit }, payload) {
         let res = await axios.post(cors + registerEndpoint, payload);
         let user = res.data;
-        Vue.$cookies.set('token', user['token']);
+        Vue.$cookies.set('Authorization', user['token']);
         commit('SET_USER', user);
     },
 
     async LOGIN({ commit }, payload) {
         let res = await axios.post(cors + loginEndpoint, payload);
         let user = res.data;
-        Vue.$cookies.set('token', user['token']);
+        Vue.$cookies.set('Authorization', user['token']);
         commit('SET_USER', user);
     },
 
     async DELETE({ getters, dispatch }) {
         let res = await axios.delete(cors + userEndpoint + '/user/destroy', {
             _id: getters.User['_id']
-        }, { headers: { 'Authorization': getters.User['token'] } })
+        });
         dispatch('LOGOUT');
         return res.data.message;
     },
@@ -50,13 +50,13 @@ const actions = {
         let res = await axios.put(cors + userEndpoint + '/user/update', {
             find: { _id: getters.User['_id'] },
             with: payload
-        }, { headers: { 'Authorization': getters.User['token'] } })
+        });
         commit('SET_USER', res.data);
         commit('SET_STEAM_PROFILE', res.data.steamid);
     },
     
     LOGOUT({ commit, dispatch }) {
-        Vue.$cookies.remove('token');
+        Vue.$cookies.remove('Authorization');
         commit('SET_USER', null);
         commit('SET_STEAM_PROFILE', null);
         commit('SET_OWNED_GAMES', []);
