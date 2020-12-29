@@ -37,20 +37,13 @@ export default {
             this.submitted = true;
             this.error = null;
 
-            this.$store.dispatch('LOGIN', {
-                'email': this.form.email,
-                'password': this.form.password
-            })
-            .then(() => { this.$router.push('/') })
-            .catch(err => { 
-                this.error = err.response ? err.response.data.error : err;
-                if (this.error == 'Missing Token.') {
-                    console.log(err.response.data.details);
-                    this.$router.push('/auth/token?_id=' + err.response.data.details._id);
-                    this.error = null;
-                }
-            })
-            .finally(() => { this.submitted = false })
+            this.$store.dispatch('LOGIN_BASIC', this.form)
+                .then(() => this.$router.push('/'))
+                .catch(err => {
+                    if (err.response.data._id) this.$router.push('/auth/token?_id=' + err.response.data._id);
+                    else this.error = err;
+                })
+                .finally(() => { this.submitted = false });
         }
     },
 }

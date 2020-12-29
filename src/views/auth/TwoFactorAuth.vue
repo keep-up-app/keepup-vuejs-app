@@ -20,8 +20,6 @@
 <script>
 
 export default {
-    name: 'Login',
-
     data() {
         return {
             submitted: false,
@@ -38,7 +36,7 @@ export default {
             this.submitted = true;
             this.error = null;
 
-            this.$store.dispatch('LOGIN', this.form)
+            this.$store.dispatch('LOGIN_AUTH', this.form)
                 .then(() => { this.$router.push('/') })
                 .catch(err => { this.error = err.response ? err.response.data.error : err })
                 .finally(() => { this.submitted = false })

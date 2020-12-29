@@ -31,8 +31,15 @@ const actions = {
         commit('SET_USER', user);
     },
 
-    async LOGIN({ commit }, payload) {
-        let res = await axios.post(cors + loginEndpoint, payload);
+    async LOGIN_BASIC({ commit }, payload) {
+        let res = await axios.post(cors + loginEndpoint + '/login/basic', payload);
+        let user = res.data;
+        Vue.$cookies.set('Authorization', user['token']);
+        commit('SET_USER', user);
+    },
+
+    async LOGIN_AUTH({ commit }, payload) {
+        let res = await axios.post(cors + loginEndpoint + '/login/2fa', payload);
         let user = res.data;
         Vue.$cookies.set('Authorization', user['token']);
         commit('SET_USER', user);
@@ -54,7 +61,7 @@ const actions = {
         commit('SET_USER', res.data);
         commit('SET_STEAM_PROFILE', res.data.steamid);
     },
-    
+
     LOGOUT({ commit, dispatch }) {
         Vue.$cookies.remove('Authorization');
         commit('SET_USER', null);
