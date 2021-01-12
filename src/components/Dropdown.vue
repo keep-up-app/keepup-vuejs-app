@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown" @click="shouldToggleDropdown()">
         <div class="label-container" :class="{ 'active': isExpanded }">
-            <p class="text trucate" :class="{ 'error' : requireSelected && !selected }">{{ selected ? selected : noneSelectedText }}</p>
+            <p class="text" :class="{ 'error' : requireSelected && !selected }">{{ selected ? selected : noneSelectedText }}</p>
             <div :class="{ 'down-arrow': !isExpanded, 'up-arrow': isExpanded }"></div>
 		</div>
 		<div class="options" :class="{ 'hide': !isExpanded }">
@@ -12,7 +12,7 @@
                 <p>{{ canHaveNoneMessage }}</p>
             </div>
 			<div class="option" v-for="option in options" :key="option.key" @click="setCurrentSelectedOption(option)">
-                <p class="trucate">{{ option.name }}</p>
+                <p>{{ option.name }}</p>
             </div>
 		</div>
 
@@ -55,39 +55,36 @@
 
 <style lang="scss" scoped>
     
-	@import './src/assets/styles/variables.scss';
+	@import './src/assets/style/variables.scss';
 
     .dropdown {
         margin: 10px 0;
         cursor: pointer;
         position: relative;
         user-select: none;
-        border-radius: 3px;
+        border-radius: 5px;
         width: 100%;
-        height: 33px;
-        background: $darker;
-        margin-bottom: 15px;
+        height: 50px;
+        background: $light;
+        margin: 25px 0;
         font-size: 15px;
-        font-family: 'Uni Sans', cursive;
-    }
-
-    .trucate {
-        text-overflow: ellipsis;
-        width: 190px;
-        overflow: hidden;
-        white-space: nowrap;
+        font-family: 'Montserrat';
     }
 
     .text {
         position: absolute;
-        line-height: 27px;
+        line-height: 46px;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: bolder;
+        margin-left: 10px;
     }
 
     .option-spacer {
         cursor: default;
         position: relative;
-        background: $darker;
-        padding-left: 4px;
+        background: $light;
+        padding-left: 10px;
         padding-bottom: 15px;
         padding-top: 15px;
         height: auto;
@@ -102,7 +99,7 @@
     .label-container {
         position: relative;
         border-radius: 3px;
-        border: $dark solid 1px;
+        border: $light solid 3px;
         width: 100%;
         height: 100%;
     }
@@ -115,7 +112,7 @@
         cursor: pointer;
         position: relative;
         overflow: auto;
-        max-height: 160px;
+        max-height: 300px;
         z-index: 1000;
         width: 100%;
         margin-bottom: 20px;
@@ -123,9 +120,11 @@
 
     .option {
         position: relative;
-        padding-left: 10px;
-        height: 35px;
-        background: $darker;
+        padding-left: 20px;
+        height: 40px;
+        font-weight: bolder;
+        background: $light;
+        font-size: 16px;
         border: transparent solid 1px;
         transition: all 100ms ease-in;
     }
@@ -146,9 +145,9 @@
         top: 50%;
         transform: translateY(-50%);
         right: 0;
-        margin-right: 10px;
-        width: 10px;
-        height: 5px;
+        margin-right: 20px;
+        width: 13px;
+        height: 6px;
         background: white;
     }
 

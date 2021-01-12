@@ -49,7 +49,7 @@ export default {
         background: $light;
         padding: 15px;
         margin-bottom: 15px;
-        border-radius: 5px;
+        border-radius: 3px;
         cursor: pointer;
     }
 

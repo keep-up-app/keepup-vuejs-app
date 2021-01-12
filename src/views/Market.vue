@@ -3,12 +3,22 @@
         <PageTitle title='Steam Games' message='see your games and game stats.'/>
         <div class="content">
             <section class="space-top">
+                <h3>Showing Market Items for <b>{{ selectedGame }}</b></h3>
+                <Dropdown
+                    :selectedOption="selectedGame"
+                    :choiceDescription="'Filter by Game'"
+                    :requireSelected="true"
+                    :options="OwnedGamesListing"
+                    @onSelectionChanged="searchByGame($event)"
+                />
                 <div v-if="Items == null">
                     <LoadingAnimation />
                 </div>
+                <div v-else-if="error">
+                    <p class="center-h"><b>{{ error }}</b></p>
+                </div>
                 <div v-else>
-                    <h2>Showing Market Items for <b>Rust</b></h2>
-                    <div id="main-listing">
+                    <div v-if="Items && Meta && Links">
                         <div class="grid-list-legend">
                             <div><p>Item</p></div>
                             <div><p>Quantity</p></div>
@@ -38,6 +48,7 @@
 import PageTitle from '@/components/PageTitle.vue';
 import MarketItemListing from '@/components/MarketItemListing.vue';
 import LoadingAnimation from '@/components/LoadingAnimation.vue';
+import Dropdown from '@/components/Dropdown.vue'
 
 export default {
 
@@ -45,13 +56,28 @@ export default {
     components: {
         PageTitle,
         LoadingAnimation,
-        MarketItemListing
+        MarketItemListing,
+        Dropdown
+    },
+
+    data() {
+        return {
+            selectedGame: 'Rust',
+            error: ''
+        }
     },
 
     computed: {
         Items: function() { return this.$store.getters.getItemData },
         Links: function() { return this.$store.getters.getItemLinks },
         Meta: function() { return this.$store.getters.getItemMeta },
+        OwnedGamesListing: function() {
+            const games = this.$store.getters.OwnedGames.games;
+            const gamesKeyValue = []
+            for (const i in games) 
+                gamesKeyValue.push({ key: games[i].appid, name: games[i].name });
+            return gamesKeyValue;
+        }
     },
 
     created() {
@@ -59,6 +85,8 @@ export default {
     },
 
     mounted() {
+        let steamid = this.$store.getters.User.steamid;
+        if (steamid) this.$store.dispatch('OWNED_GAMES', steamid);
         this.$store.dispatch('ITEMS_FROM_GAME', 252490);
     },
 
@@ -67,6 +95,14 @@ export default {
             console.log(page)
             this.$store.dispatch('ITEMS_FROM_GAME', 252490, page);
         },
+        searchByGame: async function(game = '') {
+            this.error = '';
+            this.selectedGame = game.name;
+            this.$store.commit('SET_ITEM_DATA', null);
+            this.$store.dispatch('ITEMS_FROM_GAME', game.key)
+                .catch(err => this.error = err);
+
+        }
     },
 }
 
@@ -78,19 +114,15 @@ export default {
     
     .grid-list-legend {
         display: inline-grid;
-        grid-template-columns: 56% 20% 20%;
+        grid-template-columns: 53% 20% 17%;
         grid-gap: 2%;
-        border-radius: 5px;
+        border-radius: 3px;
         width: 100%;
         margin: 25px 0;
         padding: 5px 20px;
         font-size: 14px;
         font-weight: bold;
         background: $light;
-    }
-
-    #main-listing {
-        margin: 50px 0;
     }
 
     #listing-footer {

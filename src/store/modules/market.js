@@ -21,12 +21,21 @@ const getters = {
 
 const actions = {
     ITEMS_FROM_GAME({ commit }, appid, page = 1) {
-        axios.get(cors + marketEndpoint + '/item/all/' + appid + '?page=' + page)
+        return new Promise((resolve, reject) => {
+            axios.get(cors + marketEndpoint + '/item/all/' + appid + '?page=' + page)
             .then(res => {
+                if (res.data.error) {
+                    commit('SET_ITEM_DATA', []);
+                    commit('SET_ITEM_LINKS', null);
+                    commit('SET_ITEM_META', null);                        
+                    return reject(res.data.error);
+                }
                 commit('SET_ITEM_DATA', res.data.data);
                 commit('SET_ITEM_LINKS', res.data.links);
                 commit('SET_ITEM_META', res.data.meta);
+                return resolve();
             });
+        });
     },
 };
 
