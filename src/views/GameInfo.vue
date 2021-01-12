@@ -5,7 +5,7 @@
             <div v-if="!Game && !error">
                 <LoadingAnimation />
             </div>
-            <div v-else>
+            <div v-else id="info-container">
                 <div v-if="error" class="space-top">
                     <p class="center-h">Could not load game data with appid: <strong>{{ error.game }}</strong></p>
                     <button class="space-top center-h btn-inverted" @click="$router.go(-1)">Back</button>
@@ -17,14 +17,14 @@
                         <p>Developed & Published by: <strong>{{ getPublisherList(Game.publishers) }}</strong></p>
                         <div class="small-space"><a class=" simple-link link" target="blank" :href="'https://store.steampowered.com/app/' + Game.appid">View Steam Page ↗</a></div>
                         <hr>
-                        <img :src="Game.banner">
+                        <img id="banner" :src="Game.banner">
                         <p class="game-description">{{ Game.description.replace('amp;', '&') }}</p>
-
+                        <hr>
+                        <h3>Avaialbe on theses platforms: </h3>
                         <img class="icon-os" v-if="Game.platforms.mac" src="@/assets/images/icons/os/mac.png" alt="mac">
                         <img class="icon-os" v-if="Game.platforms.linux" src="@/assets/images/icons/os/linux.png" alt="linux">
                         <img class="icon-os" v-if="Game.platforms.windows" src="@/assets/images/icons/os/windows.png" alt="windows">
                     </section>
-                    <section><pre>{{ Game }}</pre></section>
                 </div>
             </div>
         </div>
@@ -80,6 +80,17 @@ export default {
     
     @import '@/assets/style/variables.scss';
 
+    #info-container {
+        position: relative;
+        margin-top: 100px;
+    }
+
+    #banner {
+        width: 100%;
+        height: auto;
+        margin: 30px 0;
+    }
+
     .bg {
         position: fixed;
         top: 0;
@@ -90,7 +101,8 @@ export default {
     }
 
     .game-description {
-        font-size: 16px;
+        margin-bottom: 10px;
+        font-size: 18px;
     }
 
     .icon-os {
