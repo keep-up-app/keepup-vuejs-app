@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 
-const cors = 'https://cors-anywhere-app.herokuapp.com/';
-const marketEndpoint = 'https://market-api-endpoint.herokuapp.com/';
+const marketEndpoint = 'https://market-api-endpoint.herokuapp.com';
 
 
 const state = {
@@ -20,9 +19,10 @@ const getters = {
 
 
 const actions = {
-    ITEMS_FROM_GAME({ commit }, appid, page = 1) {
+    ITEMS_FROM_GAME({ commit }, data) {
         return new Promise((resolve, reject) => {
-            axios.get(cors + marketEndpoint + '/item/all/' + appid + '?page=' + page)
+            const { appid, page } = data;
+            axios.get(marketEndpoint + '/item/all/' + appid + '?page=' + (page || 1))
             .then(res => {
                 if (res.data.error) {
                     commit('SET_ITEM_DATA', []);

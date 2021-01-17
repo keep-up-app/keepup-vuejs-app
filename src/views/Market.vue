@@ -3,9 +3,9 @@
         <PageTitle title='Steam Games' message='see your games and game stats.'/>
         <div class="content">
             <section class="space-top">
-                <h3>Showing Market Items for <strong>{{ selectedGame }}</strong></h3>
+                <h3>Showing Market Items for <strong>{{ selectedGame.name }}</strong></h3>
                 <Dropdown
-                    :selectedOption="selectedGame"
+                    :selectedOption="selectedGame.name"
                     :choiceDescription="'Filter by Game'"
                     :requireSelected="true"
                     :options="OwnedGamesListing"
@@ -32,8 +32,8 @@
                                 <p id="listing-info">Showing {{ Meta.from }}-{{ Meta.to }} of {{ Meta.total }} results</p>
                             </div>
                             <div class="right" id="page-option">
-                                <button :class="{ 'disabled' : !Links.prev }" @click="changePage(Meta.current_page - 1)" class="btn margin-r">Previous</button>
-                                <button :class="{ 'disabled' : !Links.next }" @click="changePage(Meta.current_page + 1)" class="btn">Next</button>
+                                <button :class="{ 'disabled' : !Links.prev }" @click="changePage(-1)" class="btn margin-r">Previous</button>
+                                <button :class="{ 'disabled' : !Links.next }" @click="changePage(+1)" class="btn">Next</button>
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,12 @@ export default {
 
     data() {
         return {
-            selectedGame: 'Rust',
-            error: ''
+            selectedGame: {
+                name: 'Rust',
+                appid: 252490
+            },
+            error: '',
+            currentPage: 1,
         }
     },
 
@@ -72,6 +76,9 @@ export default {
         Links: function() { return this.$store.getters.getItemLinks },
         Meta: function() { return this.$store.getters.getItemMeta },
         OwnedGamesListing: function() {
+            if (!this.$store.getters.User)               
+                return null;
+    
             const games = this.$store.getters.OwnedGames.games;
             const gamesKeyValue = []
             for (const i in games) 
@@ -87,21 +94,28 @@ export default {
     mounted() {
         let steamid = this.$store.getters.User.steamid;
         if (steamid) this.$store.dispatch('OWNED_GAMES', steamid);
-        this.$store.dispatch('ITEMS_FROM_GAME', 252490);
+        this.$store.dispatch('ITEMS_FROM_GAME', { appid: this.selectedGame.appid, page: 1 })
+            .catch(err => this.error = err);
     },
 
     methods: {
         changePage: function(page) {
-            console.log(page)
-            this.$store.dispatch('ITEMS_FROM_GAME', 252490, page);
+            this.currentPage += page;
+            this.$store.dispatch('ITEMS_FROM_GAME', { appid: this.selectedGame.appid, page: this.currentPage })
+                .then(() => window.scrollTo(0, 0))
+                .catch(err => this.error = err);
         },
         searchByGame: async function(game = '') {
             this.error = '';
-            this.selectedGame = game.name;
+            this.currentPage = 1;
+            this.selectedGame = {
+                name: game.name,
+                appid: game.key
+            };
             this.$store.commit('SET_ITEM_DATA', null);
-            this.$store.dispatch('ITEMS_FROM_GAME', game.key)
+            this.$store.dispatch('ITEMS_FROM_GAME', { appid: this.selectedGame.appid, page: this.currentPage })
+                .then(() => window.scrollTo(0, 0))
                 .catch(err => this.error = err);
-
         }
     },
 }
