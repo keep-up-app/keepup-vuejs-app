@@ -13,6 +13,7 @@ const path = require('path');
  */
 
 const app = express();
+app.disable('x-powered-by');
 app.use(history());
 
 
