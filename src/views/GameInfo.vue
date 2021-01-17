@@ -17,7 +17,7 @@
                         <p>Developed & Published by: <strong>{{ getPublisherList(Game.publishers) }}</strong></p>
                         <div class="small-space"><a class=" simple-link link" target="blank" :href="'https://store.steampowered.com/app/' + Game.appid">View Steam Page ↗</a></div>
                         <hr>
-                        <img id="banner" :src="Game.banner">
+                        <img id="banner" :src="Game.banner" alt="">
                         <p class="game-description">{{ Game.description.replace('amp;', '&') }}</p>
                         <hr>
                         <h3>Avaialbe on theses platforms: </h3>

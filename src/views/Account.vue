@@ -113,8 +113,11 @@ export default {
 			switch(code) {
 				case 0: return              'red';
 				case 1: return              'green';
-				case 2 || 3 || 4: return    'orange';
-				case 5 || 6: return         'blue';
+				case 2: return 				'orange';
+				case 3: return 				'orange';
+				case 4: return 				'orange';
+				case 5: return 				'blue';
+				case 6: return 				'blue';
 				default: return             'white';
 			}
 		}

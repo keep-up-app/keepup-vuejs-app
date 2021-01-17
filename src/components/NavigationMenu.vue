@@ -2,7 +2,7 @@
     <div class="noselect">
         <div id="nav-container">
             <nav class="center-h">
-                <router-link to="/market"><img id="logo" src="@/assets/logo.png"/></router-link>
+                <router-link to="/market"><img id="logo" src="@/assets/logo.png" alt="KeepUp" /></router-link>
                 <div class="center-v" id="menu">
                     <ul>
                         <li><router-link class="menu-link graceful" to="/market">Market</router-link></li>

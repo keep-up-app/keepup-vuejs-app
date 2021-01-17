@@ -1,5 +1,5 @@
 <template>
-    <img :src="url" @error="setAltImg">
+    <img :src="url" @error="setAltImg" alt="Not Found...">
 </template>
 
 <script>

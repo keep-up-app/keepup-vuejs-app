@@ -3,7 +3,7 @@
         <PageTitle title='Steam Games' message='see your games and game stats.'/>
         <div class="content">
             <section class="space-top">
-                <h3>Showing Market Items for <b>{{ selectedGame }}</b></h3>
+                <h3>Showing Market Items for <strong>{{ selectedGame }}</strong></h3>
                 <Dropdown
                     :selectedOption="selectedGame"
                     :choiceDescription="'Filter by Game'"
@@ -15,7 +15,7 @@
                     <LoadingAnimation />
                 </div>
                 <div v-else-if="error">
-                    <p class="center-h"><b>{{ error }}</b></p>
+                    <p class="center-h"><strong>{{ error }}</strong></p>
                 </div>
                 <div v-else>
                     <div v-if="Items && Meta && Links">

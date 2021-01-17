@@ -58,7 +58,6 @@
 	@import './src/assets/style/variables.scss';
 
     .dropdown {
-        margin: 10px 0;
         cursor: pointer;
         position: relative;
         user-select: none;

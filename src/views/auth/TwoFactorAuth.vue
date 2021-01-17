@@ -3,7 +3,7 @@
         <div id="auth">
             <h1>KEEPUP GUARD</h1>
             <p>Two factor authentication is enabled on this account.</p>
-            <p>A <b>6-digit code</b> was sent to you by email, check your inbox.</p>
+            <p>A <strong>6-digit code</strong> was sent to you by email, check your inbox.</p>
             <div class="message-box"><p :class="{ 'error' : error }">{{ error }}</p></div>
             <div id="auth-form" :class="{ 'disabled' : this.submitted }">
                 <form @submit.prevent="submit">
