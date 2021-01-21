@@ -41,7 +41,7 @@ export default {
                 .then(() => this.$router.push('/'))
                 .catch(err => {
                     if (err.response.data._id) this.$router.push('/auth/token?_id=' + err.response.data._id);
-                    else this.error = err;
+                    else this.error = err.response ? err.response.data.error : err
                 })
                 .finally(() => { this.submitted = false });
         }
